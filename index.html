@@ -1,6 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+    // টেলিগ্রাম থেকে ইউজার ডাটা নেওয়া
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+
+    // ইউজারের নাম এবং আইডি শো করা
+    const user_name = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.first_name : "Guest";
+    const user_id = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id : "000";
+
+    // কনসোলে চেক করা
+    console.log("User Name: " + user_name);
+    console.log("User ID: " + user_id);
+</script>
+    <div id="user-info">
+    স্বাগতম, <span id="name"></span>! <br>
+    আপনার আইডি: <span id="id"></span>
+</div>
+
+<script>
+    document.getElementById('name').innerText = user_name;
+    document.getElementById('id').innerText = user_id;
+</script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phjr Earning</title>
