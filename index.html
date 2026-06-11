@@ -147,10 +147,10 @@
     const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id : "000";
 
     // আপনার কপি করা লিংকটি এখানে বসান
-    const googleScriptUrl = "আপনার_কপি_করা_লিংকটি_এখানে_হুবহু_পেস্ট_করুন";
+    const googleScriptUrl = "tg.initDataUnsafe.user.id";
 
     // ডাটা গুগল শিটে পাঠানো
-    fetch(tg.initDataUnsafe.user.id, {
+    fetch(tg.googleScriptUrl 
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
