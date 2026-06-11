@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phjr Earning</title>
+    <!-- Tailwind CSS CDN (ডিজাইনের জন্য) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Telegram Web App Script -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans select-none">
+
+    <!-- Header Section -->
+    <div class="p-5 bg-gray-800 text-center rounded-b-3xl shadow-lg border-b border-yellow-500/30">
+        <h1 class="text-2xl font-bold text-yellow-400 tracking-wide">Phjr Earning</h1>
+        <p class="text-xs text-gray-400 mt-1">সহজে টাস্ক পূরণ করুন ও ইনকাম করুন</p>
+    </div>
+
+    <!-- Balance Dashboard -->
+    <div class="mx-5 my-6 p-6 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-2xl shadow-xl text-center relative overflow-hidden">
+        <p class="text-sm font-medium text-amber-100 uppercase tracking-wider">আপনার মোট ব্যালেন্স</p>
+        <h2 class="text-4xl font-extrabold mt-2"><span id="balance">0.00</span> <span class="text-xl">BDT</span></h2>
+        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
+    </div>
+
+    <!-- Main Content Tabs -->
+    <div class="px-5 pb-24">
+        
+        <!-- Tasks Section -->
+        <div class="mb-6">
+            <h3 class="text-lg font-semibold mb-3 flex items-center text-yellow-400">
+                ⭐ দৈনিক টাস্ক (Daily Tasks)
+            </h3>
+            <div class="space-y-3">
+                <!-- Task 1 -->
+                <div class="flex justify-between items-center bg-gray-800 p-4 rounded-xl border border-gray-700">
+                    <div>
+                        <h4 class="font-medium text-sm">ডেইলি বোনাস ক্লেইম</h4>
+                        <p class="text-xs text-green-400 mt-0.5">+৫.০০ BDT</p>
+                    </div>
+                    <button onclick="claimDaily()" id="dailyBtn" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold text-xs px-4 py-2 rounded-lg transition">Claim</button>
+                </div>
+                <!-- Task 2 -->
+                <div class="flex justify-between items-center bg-gray-800 p-4 rounded-xl border border-gray-700">
+                    <div>
+                        <h4 class="font-medium text-sm">ইউটিউব ভিডিও দেখুন (১ মিনিট)</h4>
+                        <p class="text-xs text-green-400 mt-0.5">+২.০০ BDT</p>
+                    </div>
+                    <button onclick="doTask(2)" class="bg-gray-700 hover:bg-gray-600 text-white font-bold text-xs px-4 py-2 rounded-lg transition">Start</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Referral Section -->
+        <div class="mb-6 p-4 bg-gray-800 rounded-xl border border-gray-700">
+            <h3 class="text-md font-semibold mb-2 text-yellow-400">🔗 রেফার করে আয় করুন</h3>
+            <p class="text-xs text-gray-400 mb-3">প্রতি সফল রেফারে পাবেন ৩.০০ BDT।</p>
+            <div class="flex gap-2">
+                <input type="text" readonly value="https://t.me/PhjrEarningBot?start=ref123" class="bg-gray-900 text-xs text-gray-300 p-2.5 rounded-lg flex-1 border border-gray-700 focus:outline-none">
+                <button onclick="copyRef()" class="bg-amber-500 text-gray-900 font-bold text-xs px-4 rounded-lg">Copy</button>
+            </div>
+        </div>
+
+        <!-- Withdraw Section -->
+        <div class="p-4 bg-gray-800 rounded-xl border border-gray-700">
+            <h3 class="text-md font-semibold mb-2 text-yellow-400">💰 টাকা উত্তোলন (Withdraw)</h3>
+            <p class="text-xs text-gray-400 mb-3">নূন্যতম উইথড্র ১০০.০০ BDT (বিকাশ/নগদ)।</p>
+            <button onclick="withdraw()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded-xl text-sm transition">উইথড্র রিকোয়েস্ট পাঠান</button>
+        </div>
+
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // টেলিগ্রাম ওয়েব অ্যাপ ইনিশিয়ালাইজ করা
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // অ্যাপটি পুরো স্ক্রিনে ওপেন করার জন্য
+
+        let currentBalance = 0.00;
+
+        // ডেইলি বোনাস ফাংশন
+        function claimDaily() {
+            currentBalance += 5.00;
+            document.getElementById('balance').innerText = currentBalance.toFixed(2);
+            document.getElementById('dailyBtn').disabled = true;
+            document.getElementById('dailyBtn').innerText = "Claimed";
+            document.getElementById('dailyBtn').className = "bg-gray-700 text-gray-400 font-bold text-xs px-4 py-2 rounded-lg cursor-not-allowed";
+            alert("অভিনন্দন! আপনি ৫ টাকা দৈনিক বোনাস পেয়েছেন।");
+        }
+
+        // সাধারণ টাস্ক ফাংশন
+        function doTask(points) {
+            alert("টাস্কটি চালু হচ্ছে... সম্পূর্ণ দেখলে ব্যালেন্স যোগ হবে।");
+            setTimeout(() => {
+                currentBalance += 2.00;
+                document.getElementById('balance').innerText = currentBalance.toFixed(2);
+            }, 2000);
+        }
+
+        // রেফার লিঙ্ক কপি ফাংশন
+        function copyRef() {
+            alert("রেফারেল লিঙ্ক কপি হয়েছে!");
+        }
+
+        // উইথড্র ফাংশন
+        function withdraw() {
+            if(currentBalance < 100) {
+                alert("দুঃখিত! উইথড্র করার জন্য আপনার ব্যালেন্স পর্যাপ্ত নয়।");
+            } else {
+                alert("আপনার রিকোয়েস্টটি প্রসেস করা হচ্ছে।");
+            }
+        }
+    </script>
+</body>
+</html>
